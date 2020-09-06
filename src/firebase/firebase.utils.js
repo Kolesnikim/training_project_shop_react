@@ -1,5 +1,5 @@
-import firebase from "firebase";
-import 'firebase/storage'
+import firebase, {firestore} from "firebase";
+import 'firebase/firestore'
 import 'firebase/auth'
 
 const config = {
@@ -22,6 +22,24 @@ export default firebase
 export const auth = firebase.auth()
 export const storage = firebase.storage()
 export const signInWithGoogle = () => auth.signInWithPopup(provider).then(() => {})
+export const createUserProfileDocument = async (userAuth, additionalProps) => {
+    if (!userAuth) return;
+
+    const userRef = await firestore().doc(`users/${userAuth.uid}`)
+    const snapShot = await userRef.get()
+
+    if (!snapShot.exists) {
+        const {displayName, email} = userAuth
+        const createdAt = new Date()
+
+        try {
+            await userRef.set({displayName, email, createdAt, ...additionalProps})
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+    return userRef
+}
 
 
 
