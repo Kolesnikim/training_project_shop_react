@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom'
 import {auth} from '../../firebase/firebase.utils'
 import {connect} from 'react-redux'
 
+import CartIcon from "../cart-icon/cart-icon.component"
+import CartDropdown from "../card-dropdown/card-dropdown.component"
+
 import './header.styles.scss'
 
 import {ReactComponent as Logo} from '../../assets/crown.svg'
@@ -31,7 +34,9 @@ const Header = ({currentUser}) => (
                     </Link>
 
             }
+            <CartIcon/>
         </div>
+        <CartDropdown />
     </div>
 )
 
