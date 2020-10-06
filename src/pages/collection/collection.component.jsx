@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import './collection.styles.scss'
 
 import CollectionItem from "../../components/collection-item/co;;ection-item.component"
-import {selectCollection} from "../../redux/shop/shop.selectors";
+import { selectCollection} from "../../redux/shop/shop.selectors";
 
 const CollectionPage = ({collection}) => {
     const {items, title} = collection
@@ -21,7 +21,7 @@ const CollectionPage = ({collection}) => {
 }
 
 const mapStateToProps = (state, ownProps) => ( {
-    collection: selectCollection(ownProps.match.params.collectionId)(state)
+    collection: selectCollection(ownProps.match.params.collectionId)(state),
 })
 
 
