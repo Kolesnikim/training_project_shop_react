@@ -1,6 +1,4 @@
 ﻿import shopActionsTypes from "./shop.types";
-import {firestore} from "firebase";
-import {convertCollectionSnapshotToMap} from "../../firebase/firebase.utils";
 
 export const updateCollectionsStart = () => ({
     type: shopActionsTypes.UPDATE_COLLECTIONS_START,
@@ -16,16 +14,3 @@ export const updateCollectionsFailure = error => ({
     payload: error.message
 })
 
-export const updateCollectionsAsync = () => {
-    return dispatch => {
-        const collectionRef = firestore().collection('collections')
-        dispatch(updateCollectionsStart())
-
-        collectionRef.get().then(snapshot => {
-            const collections = convertCollectionSnapshotToMap(snapshot)
-            dispatch(updateCollectionsSuccess(collections))
-        }).catch(error => {
-            dispatch(updateCollectionsFailure(error))
-        })
-    }
-}

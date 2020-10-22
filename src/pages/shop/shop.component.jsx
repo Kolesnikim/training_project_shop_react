@@ -2,15 +2,15 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import {updateCollectionsAsync} from "../../redux/shop/shop.actions"
+import {updateCollectionsStart} from "../../redux/shop/shop.actions"
 
 import CollectionsOverviewContainer from "../../components/collection-overview/collection-overview.container"
 import CollectionContainer from "../collection/collection.container"
 
 class ShopPage extends React.Component {
     componentDidMount() {
-        const {updateCollectionsAsync} = this.props
-        updateCollectionsAsync();
+        const {updateCollectionsStart} = this.props
+        updateCollectionsStart();
     }
 
     render() {
@@ -30,7 +30,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps =  dispatch => ({
-    updateCollectionsAsync: () => dispatch(updateCollectionsAsync())
+    updateCollectionsStart: () => dispatch(updateCollectionsStart())
 })
 
 
