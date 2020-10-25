@@ -11,10 +11,10 @@ import CheckOutPage from "./pages/checkout/checkout.component";
 
 import Header from './components/header/header.component'
 
+import {checkUserSession} from "./redux/user/user.actions"
 import {selectCurrentUser} from './redux/user/user.selectors'
 import {collectionsForPreview} from './redux/shop/shop.selectors'
 
-import {auth, createUserProfileDocument} from './firebase/firebase.utils'
 
 import './App.css'
 
@@ -37,7 +37,8 @@ class App extends React.Component {
         })
      */
     componentDidMount() {
-
+         const {checkUserSession} = this.props
+        checkUserSession()
     }
 
     componentWillUnmount() {
@@ -71,6 +72,6 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    checkUserSession: () => dispatch(checkUserSession())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);
